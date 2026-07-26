@@ -54,6 +54,9 @@ importers:
       '@ros/core':
         specifier: workspace:*
         version: link:../core
+      better-sqlite3:
+        specifier: ^11.3.0
+        version: 11.10.0
     devDependencies:
       esbuild:
         specifier: ^0.24.0

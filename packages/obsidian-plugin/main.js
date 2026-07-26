@@ -868,8 +868,8 @@ var require_db = __commonJS({
       const row = db.prepare("SELECT MAX(version) as v FROM schema_version").get();
       return row?.v ?? 0;
     }
-    function openStore2(filePath) {
-      const db = new better_sqlite3_1.default(filePath);
+    function openStore2(filePath, nativeBindingPath) {
+      const db = new better_sqlite3_1.default(filePath, nativeBindingPath ? { nativeBinding: nativeBindingPath } : void 0);
       db.pragma("journal_mode = WAL");
       db.exec("CREATE TABLE IF NOT EXISTS schema_version (version INTEGER NOT NULL)");
       const applied = currentVersion(db);
@@ -1657,12 +1657,11 @@ var ResearchOperatingSystemPlugin = class extends import_obsidian.Plugin {
   store;
   engine;
   async onload() {
-    const dbPath = path.join(
-      this.app.vault.adapter.basePath ?? ".",
-      this.manifest.dir ?? ".obsidian/plugins/ros",
-      "state.sqlite"
-    );
-    this.store = (0, import_core.openStore)(dbPath);
+    const vaultBasePath = this.app.vault.adapter.basePath ?? ".";
+    const pluginDir = path.join(vaultBasePath, this.manifest.dir ?? ".obsidian/plugins/ros");
+    const dbPath = path.join(pluginDir, "state.sqlite");
+    const nativeBindingPath = path.join(pluginDir, "better_sqlite3.node");
+    this.store = (0, import_core.openStore)(dbPath, nativeBindingPath);
     this.engine = new import_core.TransformationEngine(this.store, new import_core.DependencyTracker());
     (0, import_core.registerDimension)(this.store, {
       dimension: "thread",

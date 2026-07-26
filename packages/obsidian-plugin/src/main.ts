@@ -16,12 +16,15 @@ export default class ResearchOperatingSystemPlugin extends Plugin {
   private engine!: TransformationEngine;
 
   async onload(): Promise<void> {
-    const dbPath = path.join(
-      (this.app.vault.adapter as unknown as { basePath: string }).basePath ?? '.',
-      this.manifest.dir ?? '.obsidian/plugins/ros',
-      'state.sqlite',
-    );
-    this.store = openStore(dbPath);
+    const vaultBasePath = (this.app.vault.adapter as unknown as { basePath: string }).basePath ?? '.';
+    const pluginDir = path.join(vaultBasePath, this.manifest.dir ?? '.obsidian/plugins/ros');
+    const dbPath = path.join(pluginDir, 'state.sqlite');
+    // ADR-0007: better-sqlite3's own bindings()-based auto-resolution walks
+    // the call stack to find the native .node file, which breaks once
+    // everything is collapsed into a single bundled main.js. Supplying the
+    // path explicitly skips that broken resolution entirely.
+    const nativeBindingPath = path.join(pluginDir, 'better_sqlite3.node');
+    this.store = openStore(dbPath, nativeBindingPath);
     this.engine = new TransformationEngine(this.store, new DependencyTracker());
 
     // Bootstrap the one dimension the v0 shell exercises (Thread View needs it).

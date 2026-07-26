@@ -6,7 +6,8 @@
     "build": "node esbuild.config.mjs"
   },
   "dependencies": {
-    "@ros/core": "workspace:*"
+    "@ros/core": "workspace:*",
+    "better-sqlite3": "^11.3.0"
   },
   "devDependencies": {
     "esbuild": "^0.24.0",

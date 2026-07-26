@@ -10,9 +10,10 @@ there is recorded as an ADR before use.
 ```
 spec/                    Phases 1–6: philosophy, architecture, mathematics,
                          subsystem contracts, reference implementation strategy
-ADR-0001.md … ADR-0006.md   Concrete engineering decisions (monorepo layout,
+ADR-0001.md … ADR-0007.md   Concrete engineering decisions (monorepo layout,
                          storage driver, migrations, write-boundary enforcement,
-                         testing strategy, build tooling)
+                         testing strategy, build tooling, bundler-safe native
+                         addon + migration asset loading)
 packages/core/           @ros/core — headless library, Subsystems 1, 2, 4, 7,
                          9 (minimal), 12, 13 (dimension registry only)
 packages/obsidian-plugin/  @ros/obsidian-plugin — Subsystem 8 + the UI-facing
@@ -43,8 +44,11 @@ pnpm lint    # enforces ADR-0004's write-boundary rule
 ```
 
 To install the built plugin in Obsidian: copy
-`packages/obsidian-plugin/{manifest.json,main.js}` into
-`<vault>/.obsidian/plugins/ros/`.
+`packages/obsidian-plugin/{manifest.json,main.js,better_sqlite3.node}` and the
+`packages/obsidian-plugin/migrations/` directory into
+`<vault>/.obsidian/plugins/ros/`. See ADR-0007 for why the native addon and
+migrations must be shipped as physical files alongside `main.js` rather than
+resolved via `node_modules` or a bundled module's `__dirname`.
 
 ## Provenance of this repository
 

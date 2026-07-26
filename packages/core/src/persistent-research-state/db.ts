@@ -21,9 +21,15 @@ function currentVersion(db: Database.Database): number {
 
 /** Opens (creating if absent) a ROS store at `filePath`, applying any
  *  un-applied migrations in numeric order. `filePath === ':memory:'` is
- *  supported and used throughout the test suite. */
-export function openStore(filePath: string): Store {
-  const db = new Database(filePath);
+ *  supported and used throughout the test suite.
+ *
+ *  `nativeBindingPath`, if given, is passed through to better-sqlite3 as
+ *  its `nativeBinding` option — see ADR-0007. Omit it only in contexts
+ *  where better-sqlite3's own `bindings()` auto-resolution is reliable
+ *  (plain Node, e.g. the test suite); a bundled Obsidian plugin must
+ *  always supply it. */
+export function openStore(filePath: string, nativeBindingPath?: string): Store {
+  const db = new Database(filePath, nativeBindingPath ? { nativeBinding: nativeBindingPath } : undefined);
   db.pragma('journal_mode = WAL');
   db.exec('CREATE TABLE IF NOT EXISTS schema_version (version INTEGER NOT NULL)');
   const applied = currentVersion(db);
