@@ -1,0 +1,9 @@
+{
+  "id": "ros",
+  "name": "Research Operating System",
+  "version": "0.1.0",
+  "minAppVersion": "1.4.0",
+  "description": "v0 reference shell: Capture/Interpret into a local ROS store; Thread View and Timeline rendering. Desktop only (see ADR-0002).",
+  "author": "ROS Contributors",
+  "isDesktopOnly": true
+}

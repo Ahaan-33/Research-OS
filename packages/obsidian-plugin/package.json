@@ -1,0 +1,16 @@
+{
+  "name": "@ros/obsidian-plugin",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "node esbuild.config.mjs"
+  },
+  "dependencies": {
+    "@ros/core": "workspace:*"
+  },
+  "devDependencies": {
+    "esbuild": "^0.24.0",
+    "obsidian": "^1.7.2",
+    "typescript": "^5.6.0"
+  }
+}
