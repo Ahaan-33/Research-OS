@@ -8,10 +8,13 @@ export interface Store {
   readonly db: Database.Database;
 }
 
-const MIGRATIONS_DIR = path.join(__dirname, 'migrations');
+// Fallback only: correct for the test suite (plain Node, unbundled — this
+// file's __dirname is its real source location, and migrations already
+// live next to it there). NEVER relied on once bundled — see ADR-0008.
+const DEFAULT_MIGRATIONS_DIR = path.join(__dirname, 'migrations');
 
-function migrationFiles(): string[] {
-  return fs.readdirSync(MIGRATIONS_DIR).filter((f) => f.endsWith('.sql')).sort();
+function migrationFiles(migrationsDir: string): string[] {
+  return fs.readdirSync(migrationsDir).filter((f) => f.endsWith('.sql')).sort();
 }
 
 function currentVersion(db: Database.Database): number {
@@ -27,17 +30,23 @@ function currentVersion(db: Database.Database): number {
  *  its `nativeBinding` option — see ADR-0007. Omit it only in contexts
  *  where better-sqlite3's own `bindings()` auto-resolution is reliable
  *  (plain Node, e.g. the test suite); a bundled Obsidian plugin must
- *  always supply it. */
-export function openStore(filePath: string, nativeBindingPath?: string): Store {
+ *  always supply it.
+ *
+ *  `migrationsDir`, if given, overrides where `.sql` migration files are
+ *  read from. Omit it only in the test suite; a bundled Obsidian plugin
+ *  must always supply it — `__dirname` inside the bundle is not a
+ *  reliable stand-in for the plugin's install directory. See ADR-0008. */
+export function openStore(filePath: string, nativeBindingPath?: string, migrationsDir?: string): Store {
   const db = new Database(filePath, nativeBindingPath ? { nativeBinding: nativeBindingPath } : undefined);
   db.pragma('journal_mode = WAL');
   db.exec('CREATE TABLE IF NOT EXISTS schema_version (version INTEGER NOT NULL)');
   const applied = currentVersion(db);
-  const files = migrationFiles();
+  const dir = migrationsDir ?? DEFAULT_MIGRATIONS_DIR;
+  const files = migrationFiles(dir);
   for (const file of files) {
     const version = Number(file.split('_')[0]);
     if (version > applied) {
-      const sql = fs.readFileSync(path.join(MIGRATIONS_DIR, file), 'utf8');
+      const sql = fs.readFileSync(path.join(dir, file), 'utf8');
       db.exec(sql);
       db.prepare('INSERT INTO schema_version (version) VALUES (?)').run(version);
     }

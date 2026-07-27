@@ -29,6 +29,24 @@ describe('Projection Engine (v0: thread_view, timeline only)', () => {
     expect(view.conflictFaithful).toBe(true);
   });
 
+  it('thread_view includes an element once its thread Contextual Property is supplied', () => {
+    const cap = engine.capture({ text: 'note' }, 'observation');
+    if (!cap.ok) throw new Error('capture failed');
+    engine.interpret(cap.value, 'thread', 'alpha');
+    const view = render(store, { operator: 'thread_view', parameters: {} });
+    const content = view.content as { element: string }[];
+    expect(content.map((c) => c.element)).toContain(cap.value);
+  });
+
+  it('an element with no Contextual Properties yet is absent from thread_view but present in timeline (D14: absent is legal, not a bug)', () => {
+    const cap = engine.capture({ text: 'note, no context yet' }, 'observation');
+    if (!cap.ok) throw new Error('capture failed');
+    const thread = render(store, { operator: 'thread_view', parameters: {} });
+    const timeline = render(store, { operator: 'timeline', parameters: {} });
+    expect((thread.content as { element: string }[]).map((c) => c.element)).not.toContain(cap.value);
+    expect((timeline.content as { element: string }[]).map((c) => c.element)).toContain(cap.value);
+  });
+
   it('renders timeline with conflictFaithful = true', () => {
     engine.capture({}, 'observation');
     const view = render(store, { operator: 'timeline', parameters: {} });

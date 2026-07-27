@@ -1,0 +1,8 @@
+{
+  "name": "ros-electron-better-sqlite3",
+  "private": true,
+  "description": "Deliberately NOT a pnpm workspace member (see ADR-0009). Installed with npm into its own node_modules so its better-sqlite3 native addon is a physically separate file from the one pnpm hoists for @ros/core and its Vitest suite. rebuild-for-electron.mjs compiles this copy against Electron's ABI; the root/workspace copy is never touched and stays on Node's ABI.",
+  "dependencies": {
+    "better-sqlite3": "12.11.1"
+  }
+}

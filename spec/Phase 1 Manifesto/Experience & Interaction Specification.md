@@ -259,6 +259,27 @@ The graph is constructed from Note Blocks.
 
 # Metadata
 
+> **Design clarification (added during implementation).** A captured object
+> consists of two inseparable components: a **Note Block** — the free-form
+> research content, preserved without interpretation or classification — and
+> **Contextual Properties** — structured information explicitly supplied by
+> the researcher during capture that positions the Note Block within the
+> Research OS semantic space. What this document calls "Metadata," below, is
+> the same thing as Contextual Properties; the term is kept here for
+> continuity with the rest of this document, but "not tagging" (below) should
+> be read as: these properties are not traditional metadata, they are part of
+> the captured object's semantic identity. The software's responsibility is
+> to provide an efficient interface for the researcher to supply this
+> context, not to infer it. Implementation mapping: the Note Block is a
+> Content Element's `payload` (D1); each Contextual Property supplied at
+> capture is a coordinate write against a registered dimension (D6),
+> performed as part of the same capture interaction the researcher
+> experiences as one step, even though it remains, structurally, a Capture
+> followed by one or more Interpret writes (G1, then G3 — see
+> [[07-Transformation-Algebra]]). No new generator is introduced by this
+> clarification; it is a statement about the capture *workflow*, not the
+> algebra.
+
 Metadata is not tagging.
 
 Metadata represents measurable properties of a Note Block.

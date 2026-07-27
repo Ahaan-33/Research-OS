@@ -38,9 +38,9 @@ var require_types = __commonJS({
   }
 });
 
-// node_modules/.pnpm/better-sqlite3@11.10.0/node_modules/better-sqlite3/lib/util.js
+// node_modules/.pnpm/better-sqlite3@12.11.1/node_modules/better-sqlite3/lib/util.js
 var require_util = __commonJS({
-  "node_modules/.pnpm/better-sqlite3@11.10.0/node_modules/better-sqlite3/lib/util.js"(exports2) {
+  "node_modules/.pnpm/better-sqlite3@12.11.1/node_modules/better-sqlite3/lib/util.js"(exports2) {
     "use strict";
     exports2.getBooleanOption = (options, key) => {
       let value = false;
@@ -54,9 +54,9 @@ var require_util = __commonJS({
   }
 });
 
-// node_modules/.pnpm/better-sqlite3@11.10.0/node_modules/better-sqlite3/lib/sqlite-error.js
+// node_modules/.pnpm/better-sqlite3@12.11.1/node_modules/better-sqlite3/lib/sqlite-error.js
 var require_sqlite_error = __commonJS({
-  "node_modules/.pnpm/better-sqlite3@11.10.0/node_modules/better-sqlite3/lib/sqlite-error.js"(exports2, module2) {
+  "node_modules/.pnpm/better-sqlite3@12.11.1/node_modules/better-sqlite3/lib/sqlite-error.js"(exports2, module2) {
     "use strict";
     var descriptor = { value: "SqliteError", writable: true, enumerable: false, configurable: true };
     function SqliteError(message, code) {
@@ -251,9 +251,9 @@ var require_bindings = __commonJS({
   }
 });
 
-// node_modules/.pnpm/better-sqlite3@11.10.0/node_modules/better-sqlite3/lib/methods/wrappers.js
+// node_modules/.pnpm/better-sqlite3@12.11.1/node_modules/better-sqlite3/lib/methods/wrappers.js
 var require_wrappers = __commonJS({
-  "node_modules/.pnpm/better-sqlite3@11.10.0/node_modules/better-sqlite3/lib/methods/wrappers.js"(exports2) {
+  "node_modules/.pnpm/better-sqlite3@12.11.1/node_modules/better-sqlite3/lib/methods/wrappers.js"(exports2) {
     "use strict";
     var { cppdb } = require_util();
     exports2.prepare = function prepare(sql) {
@@ -314,9 +314,9 @@ var require_wrappers = __commonJS({
   }
 });
 
-// node_modules/.pnpm/better-sqlite3@11.10.0/node_modules/better-sqlite3/lib/methods/transaction.js
+// node_modules/.pnpm/better-sqlite3@12.11.1/node_modules/better-sqlite3/lib/methods/transaction.js
 var require_transaction = __commonJS({
-  "node_modules/.pnpm/better-sqlite3@11.10.0/node_modules/better-sqlite3/lib/methods/transaction.js"(exports2, module2) {
+  "node_modules/.pnpm/better-sqlite3@12.11.1/node_modules/better-sqlite3/lib/methods/transaction.js"(exports2, module2) {
     "use strict";
     var { cppdb } = require_util();
     var controllers = /* @__PURE__ */ new WeakMap();
@@ -387,9 +387,9 @@ var require_transaction = __commonJS({
   }
 });
 
-// node_modules/.pnpm/better-sqlite3@11.10.0/node_modules/better-sqlite3/lib/methods/pragma.js
+// node_modules/.pnpm/better-sqlite3@12.11.1/node_modules/better-sqlite3/lib/methods/pragma.js
 var require_pragma = __commonJS({
-  "node_modules/.pnpm/better-sqlite3@11.10.0/node_modules/better-sqlite3/lib/methods/pragma.js"(exports2, module2) {
+  "node_modules/.pnpm/better-sqlite3@12.11.1/node_modules/better-sqlite3/lib/methods/pragma.js"(exports2, module2) {
     "use strict";
     var { getBooleanOption, cppdb } = require_util();
     module2.exports = function pragma(source, options) {
@@ -403,9 +403,9 @@ var require_pragma = __commonJS({
   }
 });
 
-// node_modules/.pnpm/better-sqlite3@11.10.0/node_modules/better-sqlite3/lib/methods/backup.js
+// node_modules/.pnpm/better-sqlite3@12.11.1/node_modules/better-sqlite3/lib/methods/backup.js
 var require_backup = __commonJS({
-  "node_modules/.pnpm/better-sqlite3@11.10.0/node_modules/better-sqlite3/lib/methods/backup.js"(exports2, module2) {
+  "node_modules/.pnpm/better-sqlite3@12.11.1/node_modules/better-sqlite3/lib/methods/backup.js"(exports2, module2) {
     "use strict";
     var fs = require("fs");
     var path2 = require("path");
@@ -464,9 +464,9 @@ var require_backup = __commonJS({
   }
 });
 
-// node_modules/.pnpm/better-sqlite3@11.10.0/node_modules/better-sqlite3/lib/methods/serialize.js
+// node_modules/.pnpm/better-sqlite3@12.11.1/node_modules/better-sqlite3/lib/methods/serialize.js
 var require_serialize = __commonJS({
-  "node_modules/.pnpm/better-sqlite3@11.10.0/node_modules/better-sqlite3/lib/methods/serialize.js"(exports2, module2) {
+  "node_modules/.pnpm/better-sqlite3@12.11.1/node_modules/better-sqlite3/lib/methods/serialize.js"(exports2, module2) {
     "use strict";
     var { cppdb } = require_util();
     module2.exports = function serialize(options) {
@@ -480,9 +480,9 @@ var require_serialize = __commonJS({
   }
 });
 
-// node_modules/.pnpm/better-sqlite3@11.10.0/node_modules/better-sqlite3/lib/methods/function.js
+// node_modules/.pnpm/better-sqlite3@12.11.1/node_modules/better-sqlite3/lib/methods/function.js
 var require_function = __commonJS({
-  "node_modules/.pnpm/better-sqlite3@11.10.0/node_modules/better-sqlite3/lib/methods/function.js"(exports2, module2) {
+  "node_modules/.pnpm/better-sqlite3@12.11.1/node_modules/better-sqlite3/lib/methods/function.js"(exports2, module2) {
     "use strict";
     var { getBooleanOption, cppdb } = require_util();
     module2.exports = function defineFunction(name, options, fn) {
@@ -511,9 +511,9 @@ var require_function = __commonJS({
   }
 });
 
-// node_modules/.pnpm/better-sqlite3@11.10.0/node_modules/better-sqlite3/lib/methods/aggregate.js
+// node_modules/.pnpm/better-sqlite3@12.11.1/node_modules/better-sqlite3/lib/methods/aggregate.js
 var require_aggregate = __commonJS({
-  "node_modules/.pnpm/better-sqlite3@11.10.0/node_modules/better-sqlite3/lib/methods/aggregate.js"(exports2, module2) {
+  "node_modules/.pnpm/better-sqlite3@12.11.1/node_modules/better-sqlite3/lib/methods/aggregate.js"(exports2, module2) {
     "use strict";
     var { getBooleanOption, cppdb } = require_util();
     module2.exports = function defineAggregate(name, options) {
@@ -551,9 +551,9 @@ var require_aggregate = __commonJS({
   }
 });
 
-// node_modules/.pnpm/better-sqlite3@11.10.0/node_modules/better-sqlite3/lib/methods/table.js
+// node_modules/.pnpm/better-sqlite3@12.11.1/node_modules/better-sqlite3/lib/methods/table.js
 var require_table = __commonJS({
-  "node_modules/.pnpm/better-sqlite3@11.10.0/node_modules/better-sqlite3/lib/methods/table.js"(exports2, module2) {
+  "node_modules/.pnpm/better-sqlite3@12.11.1/node_modules/better-sqlite3/lib/methods/table.js"(exports2, module2) {
     "use strict";
     var { cppdb } = require_util();
     module2.exports = function defineTable(name, factory) {
@@ -713,9 +713,9 @@ var require_table = __commonJS({
   }
 });
 
-// node_modules/.pnpm/better-sqlite3@11.10.0/node_modules/better-sqlite3/lib/methods/inspect.js
+// node_modules/.pnpm/better-sqlite3@12.11.1/node_modules/better-sqlite3/lib/methods/inspect.js
 var require_inspect = __commonJS({
-  "node_modules/.pnpm/better-sqlite3@11.10.0/node_modules/better-sqlite3/lib/methods/inspect.js"(exports2, module2) {
+  "node_modules/.pnpm/better-sqlite3@12.11.1/node_modules/better-sqlite3/lib/methods/inspect.js"(exports2, module2) {
     "use strict";
     var DatabaseInspection = function Database() {
     };
@@ -725,9 +725,9 @@ var require_inspect = __commonJS({
   }
 });
 
-// node_modules/.pnpm/better-sqlite3@11.10.0/node_modules/better-sqlite3/lib/database.js
+// node_modules/.pnpm/better-sqlite3@12.11.1/node_modules/better-sqlite3/lib/database.js
 var require_database = __commonJS({
-  "node_modules/.pnpm/better-sqlite3@11.10.0/node_modules/better-sqlite3/lib/database.js"(exports2, module2) {
+  "node_modules/.pnpm/better-sqlite3@12.11.1/node_modules/better-sqlite3/lib/database.js"(exports2, module2) {
     "use strict";
     var fs = require("fs");
     var path2 = require("path");
@@ -774,7 +774,7 @@ var require_database = __commonJS({
         addon.setErrorConstructor(SqliteError);
         addon.isInitialized = true;
       }
-      if (!anonymous && !fs.existsSync(path2.dirname(filename))) {
+      if (!anonymous && !filename.startsWith("file:") && !fs.existsSync(path2.dirname(filename))) {
         throw new TypeError("Cannot open database because the directory does not exist");
       }
       Object.defineProperties(this, {
@@ -801,9 +801,9 @@ var require_database = __commonJS({
   }
 });
 
-// node_modules/.pnpm/better-sqlite3@11.10.0/node_modules/better-sqlite3/lib/index.js
+// node_modules/.pnpm/better-sqlite3@12.11.1/node_modules/better-sqlite3/lib/index.js
 var require_lib = __commonJS({
-  "node_modules/.pnpm/better-sqlite3@11.10.0/node_modules/better-sqlite3/lib/index.js"(exports2, module2) {
+  "node_modules/.pnpm/better-sqlite3@12.11.1/node_modules/better-sqlite3/lib/index.js"(exports2, module2) {
     "use strict";
     module2.exports = require_database();
     module2.exports.SqliteError = require_sqlite_error();
@@ -860,24 +860,25 @@ var require_db = __commonJS({
     var better_sqlite3_1 = __importDefault(require_lib());
     var fs = __importStar(require("node:fs"));
     var path2 = __importStar(require("node:path"));
-    var MIGRATIONS_DIR = path2.join(__dirname, "migrations");
-    function migrationFiles() {
-      return fs.readdirSync(MIGRATIONS_DIR).filter((f) => f.endsWith(".sql")).sort();
+    var DEFAULT_MIGRATIONS_DIR = path2.join(__dirname, "migrations");
+    function migrationFiles(migrationsDir) {
+      return fs.readdirSync(migrationsDir).filter((f) => f.endsWith(".sql")).sort();
     }
     function currentVersion(db) {
       const row = db.prepare("SELECT MAX(version) as v FROM schema_version").get();
       return row?.v ?? 0;
     }
-    function openStore2(filePath, nativeBindingPath) {
+    function openStore2(filePath, nativeBindingPath, migrationsDir) {
       const db = new better_sqlite3_1.default(filePath, nativeBindingPath ? { nativeBinding: nativeBindingPath } : void 0);
       db.pragma("journal_mode = WAL");
       db.exec("CREATE TABLE IF NOT EXISTS schema_version (version INTEGER NOT NULL)");
       const applied = currentVersion(db);
-      const files = migrationFiles();
+      const dir = migrationsDir ?? DEFAULT_MIGRATIONS_DIR;
+      const files = migrationFiles(dir);
       for (const file of files) {
         const version = Number(file.split("_")[0]);
         if (version > applied) {
-          const sql = fs.readFileSync(path2.join(MIGRATIONS_DIR, file), "utf8");
+          const sql = fs.readFileSync(path2.join(dir, file), "utf8");
           db.exec(sql);
           db.prepare("INSERT INTO schema_version (version) VALUES (?)").run(version);
         }
@@ -1661,7 +1662,8 @@ var ResearchOperatingSystemPlugin = class extends import_obsidian.Plugin {
     const pluginDir = path.join(vaultBasePath, this.manifest.dir ?? ".obsidian/plugins/ros");
     const dbPath = path.join(pluginDir, "state.sqlite");
     const nativeBindingPath = path.join(pluginDir, "better_sqlite3.node");
-    this.store = (0, import_core.openStore)(dbPath, nativeBindingPath);
+    const migrationsDir = path.join(pluginDir, "migrations");
+    this.store = (0, import_core.openStore)(dbPath, nativeBindingPath, migrationsDir);
     this.engine = new import_core.TransformationEngine(this.store, new import_core.DependencyTracker());
     (0, import_core.registerDimension)(this.store, {
       dimension: "thread",
