@@ -6,10 +6,8 @@ import esbuild from 'esbuild';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import fs from 'node:fs';
-import { createRequire } from 'node:module';
 
 const dir = path.dirname(fileURLToPath(import.meta.url));
-const require = createRequire(import.meta.url);
 
 await esbuild.build({
   entryPoints: [path.join(dir, 'src/main.ts')],
@@ -25,8 +23,20 @@ await esbuild.build({
 // ADR-0007: ship the platform's compiled addon alongside main.js. v0 is
 // desktop, single-platform (ADR-0002); packaging for multiple platforms is
 // future work, not solved here.
-const addonPkgRoot = path.dirname(require.resolve('better-sqlite3/package.json'));
-const addonSrc = path.join(addonPkgRoot, 'build', 'Release', 'better_sqlite3.node');
+// ADR-0009: this must NOT be `require.resolve('better-sqlite3/...')` — that
+// resolves to the pnpm-hoisted copy shared with @ros/core's Vitest suite,
+// which must stay built for Node's ABI, not Electron's. The Electron-ABI
+// build lives in an isolated, non-pnpm directory built by
+// `pnpm run build:native:electron` (scripts/rebuild-native-for-electron.mjs).
+const addonSrc = path.join(dir, 'native/electron-better-sqlite3/node_modules/better-sqlite3/build/Release/better_sqlite3.node');
+if (!fs.existsSync(addonSrc)) {
+  console.error(
+    `[ADR-0009] Electron-targeted better-sqlite3 addon not found at ${addonSrc}.\n` +
+    `Run "pnpm run build:native:electron" first (see ADR-0009) — this is a ` +
+    `separate, deliberately isolated build from the one Vitest uses.`
+  );
+  process.exit(1);
+}
 const addonDest = path.join(dir, 'better_sqlite3.node');
 fs.copyFileSync(addonSrc, addonDest);
 console.log(`[ADR-0007] copied native addon: ${addonSrc} -> ${addonDest}`);

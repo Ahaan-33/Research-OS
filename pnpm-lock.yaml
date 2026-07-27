@@ -64,6 +64,9 @@ importers:
         specifier: ^12.11.1
         version: 12.11.1
     devDependencies:
+      '@types/node':
+        specifier: ^22.7.0
+        version: 22.20.1
       esbuild:
         specifier: ^0.24.0
         version: 0.24.2

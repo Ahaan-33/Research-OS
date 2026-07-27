@@ -5,3 +5,10 @@ dist/
 *.sqlite-shm
 *.tsbuildinfo
 .DS_Store
+# ADR-0009: isolated Electron-ABI better-sqlite3 build; not source, and
+# deliberately not managed by pnpm. package-lock.json here is disposable —
+# it's not the reproducibility record (pnpm-lock.yaml is), just an
+# incidental artifact of running `npm install` in isolation.
+packages/obsidian-plugin/native/electron-better-sqlite3/node_modules/
+packages/obsidian-plugin/native/electron-better-sqlite3/package-lock.json
+packages/obsidian-plugin/better_sqlite3.node

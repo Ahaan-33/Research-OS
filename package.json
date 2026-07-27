@@ -9,7 +9,8 @@
   "scripts": {
     "build": "tsc -b packages/core && tsc -p packages/obsidian-plugin --noEmit && node packages/obsidian-plugin/esbuild.config.mjs",
     "test": "pnpm --filter @ros/core test",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "build:native:electron": "node scripts/rebuild-native-for-electron.mjs"
   },
   "devDependencies": {
     "@electron/rebuild": "^4.2.0",

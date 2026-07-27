@@ -860,24 +860,25 @@ var require_db = __commonJS({
     var better_sqlite3_1 = __importDefault(require_lib());
     var fs = __importStar(require("node:fs"));
     var path2 = __importStar(require("node:path"));
-    var MIGRATIONS_DIR = path2.join(__dirname, "migrations");
-    function migrationFiles() {
-      return fs.readdirSync(MIGRATIONS_DIR).filter((f) => f.endsWith(".sql")).sort();
+    var DEFAULT_MIGRATIONS_DIR = path2.join(__dirname, "migrations");
+    function migrationFiles(migrationsDir) {
+      return fs.readdirSync(migrationsDir).filter((f) => f.endsWith(".sql")).sort();
     }
     function currentVersion(db) {
       const row = db.prepare("SELECT MAX(version) as v FROM schema_version").get();
       return row?.v ?? 0;
     }
-    function openStore2(filePath, nativeBindingPath) {
+    function openStore2(filePath, nativeBindingPath, migrationsDir) {
       const db = new better_sqlite3_1.default(filePath, nativeBindingPath ? { nativeBinding: nativeBindingPath } : void 0);
       db.pragma("journal_mode = WAL");
       db.exec("CREATE TABLE IF NOT EXISTS schema_version (version INTEGER NOT NULL)");
       const applied = currentVersion(db);
-      const files = migrationFiles();
+      const dir = migrationsDir ?? DEFAULT_MIGRATIONS_DIR;
+      const files = migrationFiles(dir);
       for (const file of files) {
         const version = Number(file.split("_")[0]);
         if (version > applied) {
-          const sql = fs.readFileSync(path2.join(MIGRATIONS_DIR, file), "utf8");
+          const sql = fs.readFileSync(path2.join(dir, file), "utf8");
           db.exec(sql);
           db.prepare("INSERT INTO schema_version (version) VALUES (?)").run(version);
         }
@@ -1661,7 +1662,8 @@ var ResearchOperatingSystemPlugin = class extends import_obsidian.Plugin {
     const pluginDir = path.join(vaultBasePath, this.manifest.dir ?? ".obsidian/plugins/ros");
     const dbPath = path.join(pluginDir, "state.sqlite");
     const nativeBindingPath = path.join(pluginDir, "better_sqlite3.node");
-    this.store = (0, import_core.openStore)(dbPath, nativeBindingPath);
+    const migrationsDir = path.join(pluginDir, "migrations");
+    this.store = (0, import_core.openStore)(dbPath, nativeBindingPath, migrationsDir);
     this.engine = new import_core.TransformationEngine(this.store, new import_core.DependencyTracker());
     (0, import_core.registerDimension)(this.store, {
       dimension: "thread",

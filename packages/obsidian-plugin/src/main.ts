@@ -24,7 +24,14 @@ export default class ResearchOperatingSystemPlugin extends Plugin {
     // everything is collapsed into a single bundled main.js. Supplying the
     // path explicitly skips that broken resolution entirely.
     const nativeBindingPath = path.join(pluginDir, 'better_sqlite3.node');
-    this.store = openStore(dbPath, nativeBindingPath);
+    // ADR-0008: __dirname inside the bundled main.js is not a reliable
+    // stand-in for the plugin's install directory in every host context
+    // (it was observed resolving into Obsidian/Electron's own asar, not
+    // the plugin folder). Reuse the same vault-relative pluginDir already
+    // proven correct for nativeBindingPath above, instead of letting
+    // db.ts fall back to __dirname.
+    const migrationsDir = path.join(pluginDir, 'migrations');
+    this.store = openStore(dbPath, nativeBindingPath, migrationsDir);
     this.engine = new TransformationEngine(this.store, new DependencyTracker());
 
     // Bootstrap the one dimension the v0 shell exercises (Thread View needs it).
